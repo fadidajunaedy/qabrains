@@ -4,7 +4,7 @@ __pycache__/
 *.pyo
 *.pyd
 *.pdb
-
+.pytest_cache
 # Virtual environment
 env/
 venv/
@@ -16,6 +16,7 @@ venv/
 *.swp
 
 # Logs & temp files
+logs/
 *.log
 *.tmp
 
