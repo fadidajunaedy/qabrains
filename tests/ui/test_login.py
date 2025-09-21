@@ -14,10 +14,11 @@ def test_login_valid(browser):
     page.enter_password("Password123")
     page.click_login()
 
-    WebDriverWait(browser, 5).until(
-      EC.presence_of_element_located((By.XPATH, "//span[text()='Login Successful']"))
+    success_message = WebDriverWait(browser, 5).until(
+      EC.presence_of_element_located((By.ID, "success-msg"))
     )
 
+    assert success_message.find_element(By.TAG_NAME, "h2").text == "LOGIN SUCCESSFUL"
     assert "logged=true" in browser.current_url
   except Exception as e:
     logger.error(f"Test failed due to: {e}")
@@ -34,10 +35,11 @@ def test_login_invalid(browser):
     page.enter_password("wrong_pass")
     page.click_login()
 
-    WebDriverWait(browser, 5).until(
-      EC.presence_of_element_located((By.XPATH, "//span[text()='Your email and password both are invalid!']"))
+    toaster = WebDriverWait(browser, 5).until(
+      EC.presence_of_element_located((By.CSS_SELECTOR, "div.toaster"))
     )
 
+    assert toaster.find_element(By.CSS_SELECTOR, "span.title").text == "Your email and password both are invalid!"
     assert "email=false&password=false" in browser.current_url
   except Exception as e:
     logger.error(f"Test failed due to: {e}")
