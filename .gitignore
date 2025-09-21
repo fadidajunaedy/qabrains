@@ -1,0 +1,27 @@
+# Python cache / compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+
+# Virtual environment
+env/
+venv/
+.venv/
+
+# IDE / editor settings
+.vscode/
+.idea/
+*.swp
+
+# Logs & temp files
+*.log
+*.tmp
+
+# Reports & test output
+reports/
+allure-report/
+*.html
+*.xml
+*.json
