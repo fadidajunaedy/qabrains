@@ -3,6 +3,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
+from utils.logger import get_logger
+
 @pytest.fixture
 def browser():
   # setup (before test)
@@ -14,3 +16,7 @@ def browser():
 
   # teardown (after test)
   driver.quit()
+
+@pytest.fixture(scope="session")
+def logger():
+  return get_logger()
