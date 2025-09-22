@@ -2,14 +2,12 @@ from pages.registration_page import RegistrationPage
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from utils.logger import get_logger
-logger = get_logger()
 
-def test_registration_valid(browser):
+def test_registration_valid(browser, logger):
   logger.info("=== [START] TEST REGISTRATION VALID ===")
   try:
     browser.get("https://practice.qabrains.com/registration")
-    page = RegistrationPage(browser)
+    page = RegistrationPage(browser, logger)
     page.enter_name("Fadida Zanetti Junaedy")
     page.enter_country("Indonesia")
     page.enter_account("Engineer")
