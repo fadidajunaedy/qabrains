@@ -1,4 +1,5 @@
 from pages.ecommerce.login_page import LoginPage
+from pages.ecommerce.home_page import HomePage
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -96,17 +97,14 @@ def test_login_valid_then_logout(browser, logger):
 
     assert "https://practice.qabrains.com/ecommerce" == browser.current_url
 
-    dropdown_menu = browser.find_element(By.XPATH, "//button[@data-slot='dropdown-menu-trigger']")
-    dropdown_menu.click()
-    menu = browser.find_element(By.XPATH, "//div[@role='menu']")
-    logout_button = menu.find_element(By.XPATH, "//div[@role='menuitem' and normalize-space(text())='Log out']")
-    logout_button.click()
+    home_page = HomePage(browser, logger)
+    home_page.open_menu_dropdown()
+    home_page.click_logout()
 
     dialog = browser.find_element(By.XPATH, "//div[@role='dialog']")
     assert dialog.find_element(By.XPATH, "//h2[@data-slot='dialog-title']").text == "Are you sure you want to log out?"
 
-    confirm_logout_button = dialog.find_element(By.XPATH, "//button[@data-slot='dialog-close' and text()='Logout']")
-    confirm_logout_button.click()
+    home_page.click_confirmation_logout()
 
     WebDriverWait(browser, 5).until(
       EC.presence_of_element_located((By.CSS_SELECTOR, ".ecommerce-auth-layout"))
