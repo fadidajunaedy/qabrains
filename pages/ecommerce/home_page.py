@@ -15,8 +15,13 @@ class HomePage:
     self.sorting_group = (By.XPATH, "//div[@data-slot='command-group']")
     self.products = (By.XPATH, "//div[contains(@class,'products')]") #products grid / container
 
+  def click_cart_link_button(self):
+    self.logger.info("Clicking cart link button")
+    self.logger.debug(f"Locator used: {self.cart_link_button}")
+    self.driver.find_element(*self.cart_link_button).click()
+
   def get_product_item(self, product):
-    locator = (By.XPATH, f"//div[contains(@class,'products')]//a[text()='{product}']/parent::div")
+    locator = (By.XPATH, f"//div[contains(@class,'products')]//a[text()='{product}']/parent::div/parent::div")
     self.logger.info("Get product item")
     self.logger.debug(f"Locator used: {locator}")
     return self.driver.find_element(*locator)
