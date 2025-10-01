@@ -8,7 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 def test_add_favorite_from_home_page(browser, logger):
   login(browser, logger)
   page = HomePage(browser, logger)
-  page.add_product_to_favorite("Sample Shirt Name")
+  page.add_to_favorite("Sample Shirt Name")
 
   notifications_section = WebDriverWait(browser, 2).until(
     EC.presence_of_element_located((By.XPATH, "//section[contains(@aria-label, 'Notifications')]"))
