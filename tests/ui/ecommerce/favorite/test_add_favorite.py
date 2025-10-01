@@ -8,8 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 def test_add_favorite_from_home_page(browser, logger):
   login(browser, logger)
   page = HomePage(browser, logger)
-  page.add_to_favorite("Sample Shirt Name")
-
+  page.toggling_favorite("Sample Shirt Name")
   notifications_section = WebDriverWait(browser, 2).until(
     EC.presence_of_element_located((By.XPATH, "//section[contains(@aria-label, 'Notifications')]"))
   )
@@ -28,7 +27,7 @@ def test_add_favorite_from_detail_page(browser, logger):
   assert "/product-details" in browser.current_url
 
   detail_page = DetailPage(browser, logger)
-  detail_page.add_to_favorite()
+  detail_page.toggling_favorite()
 
   notifications_section = WebDriverWait(browser, 2).until(
     EC.presence_of_element_located((By.XPATH, "//section[contains(@aria-label, 'Notifications')]"))
