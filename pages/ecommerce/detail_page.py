@@ -18,7 +18,7 @@ class DetailPage:
   def get_quantity(self):
     self.logger.info("Getting quantity")
     self.logger.debug(f"Locator used: {self.quantity_input}")
-    return self.driver.find_element(*self.quantity_input).get_attribute("value")
+    return int(self.driver.find_element(*self.quantity_input).get_attribute("value"))
 
   def increase_quantity(self):
     self.logger.info("Clicking increase quantity button")
