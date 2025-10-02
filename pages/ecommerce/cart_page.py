@@ -16,7 +16,7 @@ class CartPage:
     self.logger.info(f"Get quantity product")
     self.logger.debug(f"Locator used: {locator}")
     quantity = cart_list.find_element(*locator)
-    return quantity.text
+    return int(quantity.text)
 
   def click_remove(self, product):
     self.logger.info(f"Accessing cart list")
