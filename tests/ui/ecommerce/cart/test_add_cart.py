@@ -4,7 +4,6 @@ from selenium.webdriver.support import expected_conditions as EC
 
 from pages.ecommerce.home_page import HomePage
 from pages.ecommerce.detail_page import DetailPage
-from pages.ecommerce.cart_page import CartPage
 
 from utils.ecommerce.login import login
 from utils.ecommerce.get_notification import get_notification
