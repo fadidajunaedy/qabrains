@@ -14,11 +14,11 @@ class HomePage:
     self.search_sorting_framework_input = (By.XPATH, "//input[@data-slot='command-input']")
     self.sorting_group = (By.XPATH, "//div[@data-slot='command-group']")
     self.products = (By.XPATH, "//div[contains(@class,'products')]") #products grid / container
-    self.add_to_favorite_button = (By.XPATH, ".//span[@role='button']/button") # .// meaning relative to product selected
+    self.favorite_toggle_button = (By.XPATH, ".//span[@role='button']/button") # .// meaning relative to product selected
     self.add_to_cart_button = (By.XPATH, ".//button[text()='Add to cart']") # .// meaning relative to product selected
     self.remove_from_cart_button = (By.XPATH, ".//button[text()='Remove from cart']") # meaning relative to product selected
 
-  def click_cart_link_button(self):
+  def click_cart(self):
     self.logger.info("Clicking cart link button")
     self.logger.debug(f"Locator used: {self.cart_link_button}")
     self.driver.find_element(*self.cart_link_button).click()
@@ -47,11 +47,11 @@ class HomePage:
     self.logger.debug(f"Locator used: {self.logout_confirmation_button}")
     self.driver.find_element(*self.logout_confirmation_button).click()
 
-  def add_to_favorite(self, product_name):
+  def toggling_favorite(self, product_name):
     product = self.get_product(product_name)
     self.logger.info("Clicking Add to favorite button")
-    self.logger.debug(f"Locator used: {self.add_to_favorite_button}")
-    product.find_element(*self.add_to_favorite_button).click()
+    self.logger.debug(f"Locator used: {self.favorite_toggle_button}")
+    product.find_element(*self.favorite_toggle_button).click()
 
   def add_to_cart(self, product_name):
     product = self.get_product(product_name)
