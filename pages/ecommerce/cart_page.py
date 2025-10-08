@@ -13,10 +13,32 @@ class CartPage:
     cart_list = self.driver.find_element(*self.cart_list)
 
     locator = (By.XPATH, f".//div/div/h3[text()='{product}']/parent::div/parent::div/following-sibling::div/p[text()='Quantity']/following-sibling::div/span")
-    self.logger.info(f"Get quantity product")
+    self.logger.info(f"Get product quantity")
     self.logger.debug(f"Locator used: {locator}")
     quantity = cart_list.find_element(*locator)
     return int(quantity.text)
+
+  def get_price(self, product):
+    self.logger.info(f"Accessing cart list")
+    self.logger.debug(f"Locator used: {self.cart_list}")
+    cart_list = self.driver.find_element(*self.cart_list)
+
+    locator = (By.XPATH, f".//div/div/h3[text()='{product}']/parent::div/parent::div/following-sibling::div/p[text()='Price']/following-sibling::p")
+    self.logger.info(f"Get product price")
+    self.logger.debug(f"Locator used: {locator}")
+    price = cart_list.find_element(*locator)
+    return float(price.text.replace("$", ""))
+
+  def get_total(self, product):
+    self.logger.info(f"Accessing cart list")
+    self.logger.debug(f"Locator used: {self.cart_list}")
+    cart_list = self.driver.find_element(*self.cart_list)
+
+    locator = (By.XPATH, f".//div/div/h3[text()='{product}']/parent::div/parent::div/following-sibling::div/p[text()='Total']/following-sibling::p")
+    self.logger.info(f"Get product total price")
+    self.logger.debug(f"Locator used: {locator}")
+    total = cart_list.find_element(*locator)
+    return float(total.text.replace("$", ""))
 
   def click_remove(self, product):
     self.logger.info(f"Accessing cart list")
