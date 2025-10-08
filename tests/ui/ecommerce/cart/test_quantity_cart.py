@@ -23,6 +23,7 @@ def test_increase_quantity_cart_from_detail_page(browser, logger):
 
   detail_page = DetailPage(browser, logger)
   assert detail_page.get_quantity() == 1
+
   detail_page.increase_quantity()
   assert detail_page.get_quantity() == 2
 
@@ -58,7 +59,13 @@ def test_increase_quantity_cart_from_cart_page(browser, logger):
 
   cart_page = CartPage(browser, logger)
   cart_page.click_increase_quantity("Sample Shirt Name")
-  assert cart_page.get_quantity("Sample Shirt Name") == 2
+
+  quantity = cart_page.get_quantity("Sample Shirt Name")
+  price = cart_page.get_price("Sample Shirt Name")
+  total = cart_page.get_total("Sample Shirt Name")
+
+  assert quantity == 2
+  assert total == price * quantity
 
 def test_decrease_quantity_cart_from_cart_page(browser, logger):
   login(browser, logger)
@@ -75,6 +82,17 @@ def test_decrease_quantity_cart_from_cart_page(browser, logger):
 
   cart_page = CartPage(browser, logger)
   cart_page.click_increase_quantity("Sample Shirt Name")
-  assert cart_page.get_quantity("Sample Shirt Name") == 2
+  quantity = cart_page.get_quantity("Sample Shirt Name")
+  price = cart_page.get_price("Sample Shirt Name")
+  total = cart_page.get_total("Sample Shirt Name")
+
+  assert quantity == 2
+  assert total == price * quantity
+
   cart_page.click_decrease_quantity("Sample Shirt Name")
-  assert cart_page.get_quantity("Sample Shirt Name") == 1
+  quantity = cart_page.get_quantity("Sample Shirt Name")
+  price = cart_page.get_price("Sample Shirt Name")
+  total = cart_page.get_total("Sample Shirt Name")
+
+  assert quantity == 1
+  assert total == price * quantity
