@@ -9,22 +9,36 @@ from utils.ecommerce.login import login
 from utils.ecommerce.get_notification import get_notification
 
 def test_add_to_cart_from_home_page(browser, logger):
-  login(browser, logger)
-  home_page = HomePage(browser, logger)
-  home_page.add_to_cart("Sample Shirt Name")
-  assert get_notification(browser) == "Added to cart"
+  logger.info("=== [START] TEST ADD TO CART FROM HOME PAGE ===")
+  try:
+    login(browser, logger)
+    home_page = HomePage(browser, logger)
+    home_page.add_to_cart("Sample Shirt Name")
+    assert get_notification(browser) == "Added to cart"
+  except Exception as e:
+    logger.error(f"Test failed due to: {e}")
+    raise
+  finally:
+    logger.info("=== [END] TEST ADD TO CART FROM HOME PAGE ===")
 
 def test_add_to_cart_from_detail_page(browser, logger):
-  login(browser, logger)
-  home_page = HomePage(browser, logger)
-  home_page.click_product("Sample Shirt Name")
+  logger.info("=== [START] TEST ADD TO CART FROM DETAIL PAGE ===")
+  try:
+    login(browser, logger)
+    home_page = HomePage(browser, logger)
+    home_page.click_product("Sample Shirt Name")
 
-  detail_wrapper = WebDriverWait(browser, 5).until(
-    EC.presence_of_element_located((By.XPATH, "//div[@class='product-details-wrapper']"))
-  )
-  assert detail_wrapper.find_element(By.XPATH, ".//h1").text == "Sample Shirt Name"
-  assert "/product-details" in browser.current_url
+    detail_wrapper = WebDriverWait(browser, 5).until(
+      EC.presence_of_element_located((By.XPATH, "//div[@class='product-details-wrapper']"))
+    )
+    assert detail_wrapper.find_element(By.XPATH, ".//h1").text == "Sample Shirt Name"
+    assert "/product-details" in browser.current_url
 
-  detail_page = DetailPage(browser, logger)
-  detail_page.add_to_cart()
-  assert get_notification(browser) == "Added to cart"
+    detail_page = DetailPage(browser, logger)
+    detail_page.add_to_cart()
+    assert get_notification(browser) == "Added to cart"
+  except Exception as e:
+    logger.error(f"Test failed due to: {e}")
+    raise
+  finally:
+    logger.info("=== [END] TEST ADD TO CART FROM DETAIL PAGE ===")
