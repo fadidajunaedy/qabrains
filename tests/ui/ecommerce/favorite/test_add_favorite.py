@@ -10,14 +10,14 @@ from utils.ecommerce.get_notification import get_notification
 
 def test_add_favorite_from_home_page(browser, logger):
   login(browser, logger)
-  page = HomePage(browser, logger)
-  page.toggling_favorite("Sample Shirt Name")
+  home_page = HomePage(browser, logger)
+  home_page.toggling_favorite("Sample Shirt Name")
   assert get_notification(browser) == "Added to favorites"
 
 def test_add_favorite_from_detail_page(browser, logger):
   login(browser, logger)
-  page = HomePage(browser, logger)
-  page.click_product("Sample Shirt Name")
+  home_page = HomePage(browser, logger)
+  home_page.click_product("Sample Shirt Name")
 
   detail_wrapper = WebDriverWait(browser, 5).until(
     EC.presence_of_element_located((By.XPATH, "//div[@class='product-details-wrapper']"))
