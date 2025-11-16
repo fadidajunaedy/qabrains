@@ -6,6 +6,7 @@ class CartPage:
     self.logger = logger
     self.cart_list = (By.XPATH, "//div[contains(@class, 'cart-list')]")
     self.confirmation_remove_button = (By.XPATH, "//div[@data-slot='dialog-overlay' and @data-state='open']/following-sibling::div[@role='dialog']//button[text()='Remove']")
+    self.checkout_button = (By.XPATH, "//button[span[text()='Checkout']]")
 
   def get_quantity(self, product):
     self.logger.info(f"Accessing cart list")
@@ -66,7 +67,7 @@ class CartPage:
     cart_list.find_element(*locator).click()
 
   def click_increase_quantity(self, product):
-    self.logger.info(f"Accessing cart list")
+    self.logger.info("Accessing cart list")
     self.logger.debug(f"Locator used: {self.cart_list}")
     cart_list = self.driver.find_element(*self.cart_list)
 
@@ -74,3 +75,8 @@ class CartPage:
     self.logger.info(f"Clicking increase button")
     self.logger.debug(f"Locator used: {locator}")
     cart_list.find_element(*locator).click()
+
+  def click_checkout_button(self):
+    self.logger.info("Clicking checkout button")
+    self.logger.debug(f"Locator used: {self.checkout_button}")
+    self.driver.find_element(*self.checkout_button).click()
