@@ -10,8 +10,8 @@ class HomePage:
     self.favorites_link_button = (By.XPATH, "//div[@data-slot='dropdown-menu-item' and normalize-space(text())='Favorites']")
     self.logout_button = (By.XPATH, "//div[@data-slot='dropdown-menu-item' and normalize-space(text())='Log out']")
     self.logout_confirmation_button = (By.XPATH, "//button[@data-slot='dialog-close' and text()='Logout']")
-    self.popover_sorting_trigger = (By.XPATH, "//button[@data-slot='popover-trigger']")
-    self.search_sorting_framework_input = (By.XPATH, "//input[@data-slot='command-input']")
+    self.popover_sorting_trigger = (By.XPATH, "//button[@type='button' and @role='combobox']")
+    self.search_sorting_framework_input = (By.XPATH, "//input[@data-slot='command-input' and @role='combobox']")
     self.sorting_group = (By.XPATH, "//div[@data-slot='command-group']")
     self.products = (By.XPATH, "//div[contains(@class,'products')]") #products grid / container
     self.favorite_toggle_button = (By.XPATH, ".//span[@role='button']/button") # .// meaning relative to product selected
@@ -75,5 +75,14 @@ class HomePage:
     self.logger.debug(f"Locator used: {product_locator}")
     products.find_element(*product_locator).click()
 
+  def click_sorting_list_button(self):
+    self.logger.info("Clicking sorting list button")
+    self.logger.debug(f"Locator used: {self.popover_sorting_trigger}")
+    self.driver.find_element(*self.popover_sorting_trigger).click()
 
+  def click_sorting_framework(self, framework):
+    locator = (By.XPATH, f"//div[@data-slot='command-item' and @role='option' and text()='{framework}']")
+    self.logger.info("Clicking sorting framework")
+    self.logger.debug(f"Locator used: {locator}")
+    self.driver.find_element(*locator).click()
 
