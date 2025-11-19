@@ -69,9 +69,9 @@ class CheckoutOverviewPage:
   def click_finish_button(self):
     self.logger.info("Clicking finish button")
     self.logger.debug(f"Locator used: {self.finish_button}")
-    button = WebDriverWait(self.driver, 10).until(
+    finish_button = WebDriverWait(self.driver, 10).until(
       EC.element_to_be_clickable(self.finish_button)
     )
 
-    self.driver.execute_script("arguments[0].scrollIntoView({block: 'end'});", button)
-    button.click()
+    self.driver.execute_script("arguments[0].scrollIntoView('alignToTop');", finish_button)
+    finish_button.click()
