@@ -33,4 +33,4 @@ def test_form_submission_valid(browser, logger):
     logger.error(f"Test failed due to: {e}")
     raise
   finally:
-    logger.info("=== [END] TEST REGISTRATION VALID ===")
+    logger.info("=== [END] TEST FORM SUBMISSION VALID ===")
